@@ -1,6 +1,17 @@
 import sys
-sys.path.append("D:\\IBM")
-import dash13
+if sys.platform == 'win32':
+    sys.path.append("D:\\IBM")
+elif sys.platform == 'linux2':
+    sys.path.append('/home/bokinsky/')
+else:
+    print "Warning: running on unrecognized platform."
+
+try:
+    import dash13
+except ImportError:
+    print """Unable to find dash13 module.  Check that PYPATH points
+    to its parent directory before continuing."""
+    raise
 
 
 fauRecords = list()
