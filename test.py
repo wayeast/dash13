@@ -2,7 +2,7 @@ import sys
 if sys.platform == 'win32':
     sys.path.append("D:\\IBM")
 elif sys.platform == 'linux2':
-    sys.path.append('/home/bokinsky/')
+    sys.path.append('/home/bokinsky/IBM/')
 else:
     print "Warning: running on unrecognized platform."
 
@@ -47,7 +47,7 @@ allAscii = dash13.merge(fauDF, actDF)
 
 ##############################################################
 # Create pandas.DataFrame from DASH13.DBF data
-dash13 = dash13.dash13.xmlToDataFrame()
+dash13 = dash13.d13_dbf.xmlToDataFrame()
 #
 ###############################################################
 

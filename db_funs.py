@@ -6,7 +6,7 @@ Created on Thu Jan 30 17:57:02 2014
 """
 
 import pandas
-#import ascii.defaults as DEF
+import dash13.defaults as DEF
 
 def toDataFrame(rl):
     """
@@ -15,8 +15,8 @@ def toDataFrame(rl):
     @param rl: list of Records
     @rtype: pandas.DataFrame
     """
-    d = {r.recId : r.wholerec for r in rl}
-    return pandas.DataFrame.from_dict(d, orient='index')
+    d = [(r.recId, r.wholerec) for r in rl]
+    return pandas.DataFrame.from_items(d, orient='index', columns=DEF.__ascii_fields__)
 
 def merge(df1, df2):
     """

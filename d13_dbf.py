@@ -36,7 +36,7 @@ def csvToDataFrame():
 
 
 def xmlToDataFrame():
-    dicts = dict()
+    dicts = list()
     tree = et.parse(DEF.__dash13_xml__)
     root = tree.getroot()
     for record in root:
@@ -48,6 +48,8 @@ def xmlToDataFrame():
                                    rec['UNIT_ID'],
                                    rec['SYS_CODE']
                                  ])
-        index = rec.pop('REC_ID')
-        dicts[index] = rec
+        #index = rec.pop('REC_ID')
+        #dicts[index] = rec
+        dicts.append(rec)
+    #return pandas.DataFrame.from_dict(dicts, orient='index')
     return pandas.DataFrame(dicts)
