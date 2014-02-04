@@ -3,7 +3,7 @@ Cull and clean up raw ASCII data.
 """
 
 
-import ascii.defaults as DEF
+import dash13.defaults as DEF
 
 
 ############################################

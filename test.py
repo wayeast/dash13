@@ -1,42 +1,42 @@
 import sys
 sys.path.append("D:\\IBM")
-import ascii
+import dash13
 
 
 fauRecords = list()
 actRecords = list()
-start = ascii.defaults.__ascii_base__
+start = dash13.defaults.__ascii_base__
 
 ##################################################################
 ## Extract data from raw FAU and ACT files and merge into
 ##   pandas.DataFrame
-unprocessables = ascii.extract_data(start, 'FAU', fauRecords)
-unprocessables += ascii.extract_data(start, 'ACT', actRecords)
+unprocessables = dash13.extract_data(start, 'FAU', fauRecords)
+unprocessables += dash13.extract_data(start, 'ACT', actRecords)
 # Check number of unprocessable lines
 #print "Unable to extract %d lines" % len(unprocessables)
 
-fauRecords = ascii.getRecords(fauRecords)
-actRecords = ascii.getRecords(actRecords)
+fauRecords = dash13.getRecords(fauRecords)
+actRecords = dash13.getRecords(actRecords)
 
-fauRecords = ascii.removeDuplicateRecords(fauRecords)
-actRecords = ascii.removeDuplicateRecords(actRecords)
+fauRecords = dash13.removeDuplicateRecords(fauRecords)
+actRecords = dash13.removeDuplicateRecords(actRecords)
 
-fauRecords = ascii.removeBlankNarrEvent(fauRecords)
-actRecords = ascii.removeBlankNarrEvent(actRecords)
+fauRecords = dash13.removeBlankNarrEvent(fauRecords)
+actRecords = dash13.removeBlankNarrEvent(actRecords)
 
-fauRecords = ascii.removeDuplicateIds(fauRecords)
-actRecords = ascii.removeDuplicateIds(actRecords)
+fauRecords = dash13.removeDuplicateIds(fauRecords)
+actRecords = dash13.removeDuplicateIds(actRecords)
 
-fauDF = ascii.toDataFrame(fauRecords)
-actDF = ascii.toDataFrame(actRecords)
+fauDF = dash13.toDataFrame(fauRecords)
+actDF = dash13.toDataFrame(actRecords)
 
-allAscii = ascii.merge(fauDF, actDF)
+allAscii = dash13.merge(fauDF, actDF)
 ##
 ################################################################
 
 ##############################################################
 # Create pandas.DataFrame from DASH13.DBF data
-dash13 = ascii.dash13.xmlToDataFrame()
+dash13 = dash13.dash13.xmlToDataFrame()
 #
 ###############################################################
 

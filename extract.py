@@ -3,7 +3,7 @@ Routines for extracting data from unworked ASCII data files
 """
 
 import re, os
-import ascii.defaults as DEF
+import dash13.defaults as DEF
 
 ##########################################################
 # regular expressions, etc. to catch those lines we don't

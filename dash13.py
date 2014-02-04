@@ -8,7 +8,7 @@ Created on Sat Feb 01 16:22:14 2014
 import xml.etree.ElementTree as et
 import pandas
 
-import ascii.defaults as DEF
+import dash13.defaults as DEF
 
 
 def csvToDataFrame():

@@ -11,8 +11,8 @@ except ImportError:
     """
     raise
 
-from ascii.extract import *
-from ascii.clean import *
-from ascii.db_funs import *
+from dash13.extract import *
+from dash13.clean import *
+from dash13.db_funs import *
 
-import ascii.dash13
+import dash13.dash13
