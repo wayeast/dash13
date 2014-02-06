@@ -38,8 +38,10 @@ actRecords = dash13.removeBlankNarrEvent(actRecords)
 fauRecords = dash13.removeDuplicateIds(fauRecords)
 actRecords = dash13.removeDuplicateIds(actRecords)
 
-fauDF = dash13.toDataFrame(fauRecords)
-actDF = dash13.toDataFrame(actRecords)
+#fauDF = dash13.toDataFrame(fauRecords)
+#actDF = dash13.toDataFrame(actRecords)
+fauDF = dash13.to_stat_DF(fauRecords)
+actDF = dash13.to_stat_DF(actRecords)
 
 allAscii = dash13.merge(fauDF, actDF)
 ##
@@ -47,7 +49,7 @@ allAscii = dash13.merge(fauDF, actDF)
 
 ##############################################################
 # Create pandas.DataFrame from DASH13.DBF data
-dash13 = dash13.d13_dbf.xmlToDataFrame()
+#d13 = dash13.d13_dbf.xmlToDataFrame()
 #
 ###############################################################
 

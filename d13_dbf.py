@@ -8,7 +8,7 @@ Created on Sat Feb 01 16:22:14 2014
 import xml.etree.ElementTree as et
 import pandas
 
-import dash13.defaults as DEF
+from . import defaults as DEF
 
 
 def csvToDataFrame():
@@ -53,3 +53,24 @@ def xmlToDataFrame():
         dicts.append(rec)
     #return pandas.DataFrame.from_dict(dicts, orient='index')
     return pandas.DataFrame(dicts)
+
+def xmlToDicts():
+    dicts = list()
+    tree = et.parse(DEF.__dash13_xml__)
+    root = tree.getroot()
+    for record in root:
+        rec = dict.fromkeys(DEF.__dash13_fields__, '')
+        for field in record:
+            rec[field.tag.strip()] = field.text
+        rec['REC_ID'] = '_'.join([ rec['FAULTDAT'],
+                                   rec['FAULTNO'],
+                                   rec['UNIT_ID'],
+                                   rec['SYS_CODE']
+                                 ])
+        #index = rec.pop('REC_ID')
+        #dicts[index] = rec
+        dicts.append(rec)
+    #return pandas.DataFrame.from_dict(dicts, orient='index')
+    return dicts
+
+

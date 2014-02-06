@@ -11,8 +11,8 @@ except ImportError:
     """
     raise
 
-from dash13.extract import *
-from dash13.clean import *
-from dash13.db_funs import *
+from .extract import *
+from .clean import *
+from .db_funs import *
 
-import dash13.d13_dbf
+from . import d13_dbf

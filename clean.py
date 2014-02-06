@@ -3,7 +3,7 @@ Cull and clean up raw ASCII data.
 """
 
 
-import dash13.defaults as DEF
+from . import defaults as DEF
 
 
 ############################################
@@ -41,7 +41,7 @@ class Record(object):
     def __init__(self, l):
         if len(l) != 11:  # quick check
             raise RuntimeError("Cannot create record from list: %s" % str(l))
-        
+        self._serno = str(l[4])
         l[4] = scrub_serno(l[4])
         self.values = tuple(l)
 
@@ -49,7 +49,6 @@ class Record(object):
     def wholerec(self):
         """"wholerec is all values except filename and line no"""
         return self.values[:-2]
-
     @property
     def recId(self):
         return '_'.join([self.EVENT_DATE,
@@ -57,42 +56,39 @@ class Record(object):
                          self.EI_ID,
                          self.SYS_CODE
                          ])
-
     @property
     def CORR_DATE_TIME(self):
         return self.values[0]
-
     @property
     def WUC(self):
         return self.values[1]
-
     @property
     def SYS_CODE(self):
         return self.values[2]
-
     @property
     def MODEL(self):
         return self.values[3]
-
     @property
     def EI_ID(self):
         return self.values[4]
-
     @property
     def EVENT_DATE(self):
         return self.values[5]
-
     @property
     def EVENT_NO(self):
         return self.values[6]
-
     @property
     def STATUS(self):
         return self.values[7]
-
     @property
     def NARR(self):
         return self.values[8]
+    @property
+    def filename(self):
+        return self.values[9]
+    @property
+    def lineno(self):
+        return self.values[10]
 
     def to_csv(self):
         values = list(self.values)
@@ -129,7 +125,7 @@ class Record(object):
     
 def getRecords(fromloc):
     """
-    Return list of Records from fromloc.
+    Return list of RAsciiecords from fromloc.
     
     @type  fromloc: str or list
     @param fromloc: location of extracted data to import into Record list
