@@ -12,41 +12,24 @@ except ImportError:
     print """Unable to find dash13 module.  Check that PYPATH points
     to its parent directory before continuing."""
     raise
+import pandas
 
 
-fauRecords = list()
-actRecords = list()
-start = dash13.defaults.__ascii_base__
+
 
 ##################################################################
 ## Extract data from raw FAU and ACT files and merge into
 ##   pandas.DataFrame
-unprocessables = dash13.extract_data(start, 'FAU', fauRecords)
-unprocessables += dash13.extract_data(start, 'ACT', actRecords)
-# Check number of unprocessable lines
-#print "Unable to extract %d lines" % len(unprocessables)
-
-fauRecords = dash13.getRecords(fauRecords)
-actRecords = dash13.getRecords(actRecords)
-
-fauRecords = dash13.removeDuplicateRecords(fauRecords)
-actRecords = dash13.removeDuplicateRecords(actRecords)
-
-fauRecords = dash13.removeBlankNarrEvent(fauRecords)
-actRecords = dash13.removeBlankNarrEvent(actRecords)
-
-fauRecords = dash13.removeDuplicateIds(fauRecords)
-actRecords = dash13.removeDuplicateIds(actRecords)
-
-#fauDF = dash13.toDataFrame(fauRecords)
-#actDF = dash13.toDataFrame(actRecords)
-fauDF = dash13.to_stat_DF(fauRecords)
-actDF = dash13.to_stat_DF(actRecords)
-
-allAscii = dash13.merge(fauDF, actDF)
+vmep = dash13.ascii_plus_vmep()
+writer = pandas.ExcelWriter("D:\\IBM\\test\\vmep_ascii.xlsx")
+vmep.to_excel(writer, sheet_name='VMEP++')
+writer.save()
+#d13 = dash13.dash13_to_df()
 ##
 ################################################################
 
+#vmep = pd.ExcelFile(latest_vmep)
+#vmep = vmep.parse(xlsx_sheet_name, index_col=None, na_values='')
 ##############################################################
 # Create pandas.DataFrame from DASH13.DBF data
 #d13 = dash13.d13_dbf.xmlToDataFrame()
