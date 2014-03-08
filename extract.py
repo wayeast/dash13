@@ -36,6 +36,12 @@ def simplify(s):
             current = c
     return ret
 
+def likelyPageNo(s):
+    if (PAGENUMLINE.match(s) and
+        int(s) <= PAGENUMRANGE):
+        return True
+    return False
+    
 def interesting(s):
     """Determine if a line is worth trying to process."""
     if not s: return False
@@ -54,16 +60,10 @@ def interesting(s):
     elif DASHLINE.match(s): return False
     elif STARLINE.match(s): return False
     elif simplify(s) == 'CLOSED': return False
-    elif (PAGENUMLINE.match(s) and
-          int(s) <= PAGENUMRANGE):
+    elif likelyPageNo(s):
         return False
     return True
 
-def likelyPageNo(s):
-    if (PAGENUMLINE.match(s) and
-        int(s) <= PAGENUMRANGE):
-        return True
-    return False
 #
 ############################################################
 

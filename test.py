@@ -16,14 +16,29 @@ import pandas
 
 
 
+#import pickle
+ascii = dash13.ascii_to_df()
+print 'finished extracting ascii data...'
+#pickle.dump(ascii, open('D:\\IBM\\test\\ascii_df.pkl', 'wb'))
+vmep = dash13.vmep_to_df()
+print 'finished extracting vmep data to df...'
+#pickle.dump(vmep, open('D:\\IBM\\test\\vmep_df.pkl', 'wb'))
+print 'making list of dfs...'
+dfs = [vmep, ascii]
+print 'concatenating...'
+concat = pandas.concat(dfs)
+concat.sort(['EI_ID', 'EVENT_DATE', 'FAULTNO'],
+            inplace=True, 
+            ascending=[1,0,0])
+
 
 ##################################################################
 ## Extract data from raw FAU and ACT files and merge into
 ##   pandas.DataFrame
-vmep = dash13.ascii_plus_vmep()
-writer = pandas.ExcelWriter("D:\\IBM\\test\\vmep_ascii.xlsx")
-vmep.to_excel(writer, sheet_name='VMEP++')
-writer.save()
+#vmep = dash13.ascii_plus_vmep()
+#writer = pandas.ExcelWriter("D:\\IBM\\test\\vmep_ascii.xlsx")
+#vmep.to_excel(writer, sheet_name='VMEP++')
+#writer.save()
 #d13 = dash13.dash13_to_df()
 ##
 ################################################################
