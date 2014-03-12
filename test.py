@@ -21,17 +21,35 @@ ascii = dash13.ascii_to_df()
 print 'finished extracting ascii data...'
 #pickle.dump(ascii, open('D:\\IBM\\test\\ascii_df.pkl', 'wb'))
 vmep = dash13.vmep_to_df()
-print 'finished extracting vmep data to df...'
+print 'finished extracting vmep data...'
 #pickle.dump(vmep, open('D:\\IBM\\test\\vmep_df.pkl', 'wb'))
 print 'making list of dfs...'
 dfs = [vmep, ascii]
 print 'concatenating...'
-concat = pandas.concat(dfs)
-concat.sort(['EI_ID', 'EVENT_DATE', 'FAULTNO'],
+cc = pandas.concat(dfs)
+cc.sort(['EI_ID', 'EVENT_DATE', 'FAULTNO'],
             inplace=True, 
             ascending=[1,0,0])
-
-
+#data = dash13.ascii_plus_vmep()
+#%%
+def elim_newlines(x):
+    x = str(x)
+    x.replace('\r', '')
+    x.replace('\n', ' ')
+    return x
+     
+#%%
+def get_rid_of_stuff(col):
+    newcol = []
+    for line in col:
+        r = " ".join(line.split('\r\n'))
+        newcol.append(r)
+    return newcol
+#%%
+        
+#print "eliminating newlines..."    
+#cc['ACTION'] = concat['ACTION'].apply(elim_newlines)
+#concat.to_csv('D:\\IBM\\test\\vmep_ascii.csv', sep='~', na_rep='', index=False)
 ##################################################################
 ## Extract data from raw FAU and ACT files and merge into
 ##   pandas.DataFrame

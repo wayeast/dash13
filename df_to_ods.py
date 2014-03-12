@@ -31,3 +31,6 @@ def df_to_ods(df, path):
     
     manifest = tempfile.TemporaryFile()
     manifest.write(mani)
+    
+    content = tempfile.TemporaryFile()
+    content.write()
